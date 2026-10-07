@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#ffffff">
 <title>Hexacube</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png">
@@ -51,7 +53,8 @@
   /* ---- always reserve the vertical scrollbar's width, so switching between a
      tall page (scrollbar shown) and a short one (scrollbar hidden) doesn't
      shift the width available to centered/edge-aligned layout ---- */
-  html{overflow-y:scroll;}
+  :root{color-scheme:only light;}
+  html{overflow-y:scroll;background:#ffffff;}
   @supports (scrollbar-gutter:stable){
     html{overflow-y:auto;scrollbar-gutter:stable;}
   }
