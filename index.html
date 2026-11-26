@@ -1049,6 +1049,20 @@
     .meta-line{font-size:11px;gap:4px;}
     .meta-line svg{width:12px;height:12px;}
   }
+
+  /* ---- home links: tidy 3 x 3 grid, equal widths ---- */
+  .links-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:660px;gap:12px;padding:0 20px;}
+  .link-hex{width:100%;justify-content:center;}
+  @media (max-width:640px){
+    .links-row{max-width:380px;gap:10px;padding:0 16px;}
+    .link-hex{
+      width:100%;height:auto;aspect-ratio:auto;flex-direction:column;gap:6px;padding:14px 4px 12px;border-radius:20px;
+    }
+    .link-hex span{
+      position:static;width:auto;height:auto;margin:0;clip:auto;max-width:100%;
+      overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px;
+    }
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1155,12 +1169,12 @@
           <div class="deco deco-hex-10"><svg viewBox="0 0 100 100"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="none" stroke="currentColor" stroke-width="10"/></svg></div>
         </div>
         <div class="polaroids" aria-hidden="true">
-          <figure class="pol pol-1"><img src="covers/to-the-endless-star.webp" alt="" loading="lazy"></figure>
-          <figure class="pol pol-2"><img src="covers/airy-vibe.webp" alt="" loading="lazy"></figure>
-          <figure class="pol pol-3"><img src="covers/girlz-party.webp" alt="" loading="lazy"></figure>
-          <figure class="pol pol-4"><img src="covers/lets-go-hardcore.webp" alt="" loading="lazy"></figure>
-          <figure class="pol pol-5"><img src="covers/chocolate-starburst-friends.webp" alt="" loading="lazy"></figure>
-          <figure class="pol pol-6"><img src="covers/stay-pure.webp" alt="" loading="lazy"></figure>
+          <figure class="pol pol-1"><img alt="" loading="lazy"></figure>
+          <figure class="pol pol-2"><img alt="" loading="lazy"></figure>
+          <figure class="pol pol-3"><img alt="" loading="lazy"></figure>
+          <figure class="pol pol-4"><img alt="" loading="lazy"></figure>
+          <figure class="pol pol-5"><img alt="" loading="lazy"></figure>
+          <figure class="pol pol-6"><img alt="" loading="lazy"></figure>
         </div>
         <div class="identity">
           <img class="profile" src="assets/profile.webp" alt="Hexacube profile">
@@ -6193,6 +6207,23 @@
     obs.observe(el,{attributes:true,attributeFilter:['class'],attributeOldValue:true});
   });
   document.querySelectorAll('.panel.is-active,.subpanel.is-active').forEach(kick);
+})();
+</script>
+<script>
+/* home polaroid wall: on every load, pick 6 distinct random covers from the
+   Music Works cards already on the page */
+(function(){
+  var seen={}, pool=[];
+  document.querySelectorAll('.release-card').forEach(function(card){
+    var img=card.querySelector('.cover img'); if(!img) return;
+    var s=img.getAttribute('src'); if(!s || s.indexOf('covers/')!==0) return;
+    /* tracks from the same album share artwork: one pick per album */
+    var p1=card.querySelector('.m-p1'), m=p1 && p1.textContent.match(/\[([^\]]+)\]/);
+    var key=m ? 'album:'+m[1].trim().toLowerCase() : s;
+    if(!seen[key]){ seen[key]=1; pool.push(s); }
+  });
+  for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
+  document.querySelectorAll('.pol img').forEach(function(img,k){ if(pool[k]) img.src=pool[k]; });
 })();
 </script>
 </body>
