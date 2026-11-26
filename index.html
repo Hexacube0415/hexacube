@@ -36,9 +36,9 @@
     --meta-venue:#3366cc;
     --meta-genre:#b45309;
     --radius:24px;
-    --font-en:'Manrope','Noto Sans KR','Noto Sans JP',sans-serif;
-    --font-kr:'Manrope','Noto Sans KR','Noto Sans JP',sans-serif;
-    --font-head:'Plus Jakarta Sans','Noto Sans KR','Noto Sans JP',sans-serif;
+    --font-en:'Manrope','Noto Sans KR','Noto Sans JP','Noto Sans Bamum',sans-serif;
+    --font-kr:'Manrope','Noto Sans KR','Noto Sans JP','Noto Sans Bamum',sans-serif;
+    --font-head:'Plus Jakarta Sans','Noto Sans KR','Noto Sans JP','Noto Sans Bamum',sans-serif;
     --font-display:var(--font-head);
   }
   /* This page is a deliberately light, single-theme brand page: it always
@@ -1063,10 +1063,13 @@
       overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px;
     }
   }
+
+  .news-card.no-link{cursor:default;}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bamum&text=%F0%96%A4%90&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;1,600&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Anton&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
 
 <div id="app" lang-kr-active class="notranslate" translate="no">
@@ -1230,6 +1233,14 @@
                 <p class="i18n" data-kr="처음으로 일본에 가서 DJ를 하게 되었습니다! 이번에 제가 가서 틀 테마는 리믹스와 하이퍼플립! 항상 동인 음악을 작곡하는 입장으로서, 드디어 제 음악을 들어주시는 일본 분들을 만날 수 있게 되어 너무 기쁩니다. 열심히 준비해보겠습니다, 항상 감사드립니다!!" data-en="I'm heading to Japan for the first time to DJ! This time my theme will be remixes and Hyperflip. As someone who's always written doujin music, I'm thrilled to finally get to meet the Japanese listeners who've been hearing my tracks. I'll prepare as hard as I can — thank you all, always!!" data-jp="初めて日本でDJをすることになりました!今回披露するテーマはリミックスとHyperflipです。いつも同人音楽を作っている身として、ついに自分の曲を聴いてくださっている日本の皆さんに会えることになり、とても嬉しく思います。しっかり準備して臨みます、いつもありがとうございます!!"></p>
               </div>
             </a>
+            <div class="news-card no-link">
+              <div class="news-photo"><img src="assets/news-stay-in-and-dance.webp" alt="This winter, stay in and dance"></div>
+              <div class="news-body">
+                <h3 class="i18n" data-kr="𖤐⋆｡.Thiš wińter, staÿ įn and dançe‧⁺ ⊹˚. DJ 출연" data-en="Performing as a DJ at 𖤐⋆｡.Thiš wińter, staÿ įn and dançe‧⁺ ⊹˚.!" data-jp="「𖤐⋆｡.Thiš wińter, staÿ įn and dançe‧⁺ ⊹˚.」にDJとして出演!"></h3>
+                <span class="news-date">2026.12.04</span>
+                <p class="i18n" data-kr="대표 하이퍼플립 아티스트 Natsu가 내한하는 국내 하이퍼플립 파티! DJ로 출연하게 되었습니다. 겨울을 후끈하게 데우는 빡센 음악들을 잔뜩 틀고 갈 예정입니다. 잘 부탁드립니다!" data-en="A hyperflip party in Korea with Natsu, one of the leading hyperflip artists, coming over as a guest! I&#x27;ll be playing there as a DJ, bringing a pile of hard-hitting tracks to heat up the winter. Hope to see you there!" data-jp="代表的なハイパーフリップアーティストのNatsuさんが来韓する、国内ハイパーフリップパーティー!DJとして出演することになりました。冬を熱く温める激しい曲をたっぷりかけていく予定です。よろしくお願いします!"></p>
+              </div>
+            </div>
             <a class="news-card" href="https://x.com/VIRTUALS_KR/status/2093594504423223613" target="_blank" rel="noopener noreferrer">
               <div class="news-photo"><img src="assets/news-virtuals.webp" alt="VIRTUALS 2026 Day 1 Time Table"></div>
               <div class="news-body">
@@ -6224,6 +6235,17 @@
   });
   for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
   document.querySelectorAll('.pol img').forEach(function(img,k){ if(pool[k]) img.src=pool[k]; });
+})();
+</script>
+<script>
+/* home news: notices dated more than 6 months before today are dropped
+   automatically on load */
+(function(){
+  var now=new Date(), cut=new Date(now.getFullYear(), now.getMonth()-6, now.getDate());
+  document.querySelectorAll('.news-card').forEach(function(card){
+    var d=card.querySelector('.news-date'), m=d && d.textContent.trim().match(/^(\d{4})\.(\d{1,2})\.(\d{1,2})/);
+    if(m && new Date(+m[1], +m[2]-1, +m[3]) < cut) card.remove();
+  });
 })();
 </script>
 </body>
