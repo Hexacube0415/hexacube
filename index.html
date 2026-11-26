@@ -926,6 +926,209 @@
 
   /* ---- footer ---- */
   footer{background:var(--ash);border-top:none;padding:32px 24px;color:var(--ink-soft);}
+
+  /* =====================================================================
+     Blok bold layer — dark showroom hero, centered section headlines,
+     product-gallery cards with hover "view" plates, a product-detail style
+     DJ page with a spec table and a numbered setlist, and restrained motion.
+     ===================================================================== */
+  :root{--ease:cubic-bezier(.2,.7,.2,1);}
+
+  /* ---- home: full-bleed Carbon Ink hero with drifting teal shapes ---- */
+  .hero{background:var(--ink);color:#fff;padding:0 0 88px;isolation:isolate;}
+  .hero::before,.hero::after{
+    content:'';position:absolute;z-index:-1;border-radius:46% 54% 60% 40% / 52% 42% 58% 48%;
+    background:var(--accent);filter:blur(2px);opacity:.22;pointer-events:none;
+  }
+  .hero::before{width:min(560px,62vw);height:min(520px,58vw);right:-12%;top:-28%;animation:blob 22s ease-in-out infinite alternate;}
+  .hero::after{width:min(420px,52vw);height:min(380px,46vw);left:-10%;bottom:-30%;opacity:.14;animation:blob 26s ease-in-out infinite alternate-reverse;}
+  @keyframes blob{
+    0%{border-radius:46% 54% 60% 40% / 52% 42% 58% 48%;transform:translate(0,0) rotate(0);}
+    50%{border-radius:58% 42% 38% 62% / 40% 60% 40% 60%;}
+    100%{border-radius:40% 60% 52% 48% / 60% 38% 62% 40%;transform:translate(-40px,30px) rotate(25deg);}
+  }
+  .home-decor{display:none;}
+  .identity{padding-top:84px;}
+  .profile{border-color:rgba(255,255,255,.35);background:transparent;}
+  .tagline{color:rgba(255,255,255,.82);}
+  .links-row{margin-top:42px;}
+  .link-hex{background:transparent;border-color:rgba(255,255,255,.28);color:#fff;}
+  .link-hex .link-icon{color:#fff;}
+  .link-hex:hover,.link-hex:focus-visible{background:var(--brand);border-color:var(--brand);}
+  .link-hex[data-brand="twitter"]:hover{background:#fff;color:var(--ink);border-color:#fff;}
+  .link-hex[data-brand="twitter"]:hover .link-icon{color:var(--ink);}
+
+  /* ---- home news: section headline block + editorial grid ---- */
+  .news{margin-top:88px;}
+  .section-head{text-align:center;margin-bottom:40px;}
+  .section-head::after{
+    content:'Latest News';display:block;margin-top:10px;font-family:var(--font-head);font-weight:700;
+    font-size:clamp(26px,3.6vw,38px);letter-spacing:.09em;text-transform:uppercase;color:var(--ink);
+  }
+  .news-icon{color:var(--accent-deep);}
+  .news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 28px;border-top:none;}
+  .news-card{flex-direction:column;border:none;padding:0;gap:0;}
+  .news-photo,.news-card.featured .news-photo{
+    width:100%;flex:none;aspect-ratio:4/3;background:var(--wash);border-radius:var(--radius);
+    display:flex;align-items:center;justify-content:center;padding:22px;overflow:hidden;
+  }
+  .news-photo img{width:auto;max-width:100%;max-height:100%;height:auto;object-fit:contain;transition:transform .5s var(--ease);}
+  .news-card:hover .news-photo img{transform:scale(1.04);}
+  .news-body{padding:18px 0 0;}
+  .news-body h3{font-size:17px;}
+  .news-body p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .news-card.featured{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:48px;}
+  .news-card.featured .news-photo{aspect-ratio:16/11;padding:36px;}
+  .news-card.featured .news-body{padding:0;}
+  .news-card.featured .news-body h3{font-family:var(--font-head);font-weight:700;font-size:clamp(24px,3vw,34px);letter-spacing:.06em;line-height:1.25;margin-bottom:14px;}
+  .news-card.featured .news-body p{-webkit-line-clamp:unset;font-size:15px;line-height:1.75;}
+  .news-card.featured .news-body::after{
+    content:'Read More';display:inline-block;margin-top:22px;padding:11px 22px;border:1px solid var(--accent);color:var(--accent-deep);
+    border-radius:var(--radius);font-family:var(--font-label);font-weight:600;font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+    transition:background-color .2s,color .2s;
+  }
+  .news-card.featured:hover .news-body::after{background:var(--accent);color:var(--accent-ink);}
+  @media (max-width:860px){
+    .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 18px;}
+    .news-card.featured{grid-template-columns:1fr;gap:22px;}
+  }
+  @media (max-width:520px){
+    .news-grid{grid-template-columns:1fr;}
+    .news-card{flex-direction:column;}
+    .news-photo{padding:16px;}
+  }
+
+  /* ---- centered section headline block + collection tabs ---- */
+  .subtab-head{background:none;padding:0;margin:0 0 56px;text-align:center;border-bottom:1px solid var(--line);border-radius:0;}
+  .subtab-head .breadcrumb{margin-bottom:10px;}
+  .subtab-head-top{flex-direction:column;align-items:center;gap:6px;margin-bottom:8px;}
+  .joker-teaser{margin:0;text-align:center;}
+  .subnav{justify-content:center;gap:0 34px;}
+  .subnav button{padding:14px 0 16px;}
+  .page-head{text-align:center;margin-bottom:40px;}
+  .page-head-row{justify-content:center;position:relative;}
+  .page-head .detail-back{position:absolute;left:0;top:50%;transform:translateY(-50%);}
+  .page-title{font-size:clamp(28px,4.2vw,44px);}
+  .page-head .bar{margin:16px auto 0;}
+  .page-desc{margin:-16px auto 48px;text-align:center;max-width:760px;}
+  .flt-bar{justify-content:center;margin:-24px 0 36px;}
+
+  /* ---- product-gallery cards with hover plates ---- */
+  .cover,.poster{background:var(--wash);}
+  .release-card .cover{padding:18px;}
+  .release-card .cover img{box-shadow:0 1px 0 rgba(0,0,0,.04);}
+  .party-card .poster{padding:16px 16px 0;align-items:flex-end;}
+  .party-card .poster img{height:auto;max-height:100%;object-fit:contain;object-position:bottom;}
+  .release-card .cover::after,.party-card .poster::after{
+    position:absolute;left:12px;right:12px;bottom:12px;padding:11px 0;text-align:center;background:var(--ink);color:#fff;
+    font-family:var(--font-label);font-weight:600;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;border-radius:var(--radius);
+    opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease),transform .25s var(--ease);
+  }
+  .release-card .cover::after{content:'Listen \2197';}
+  .party-card .poster::after{content:'View Setlist \2192';}
+  .release-card:hover .cover::after,.party-card:hover .poster::after,.party-card:focus-visible .poster::after{opacity:1;transform:none;}
+  .release-card.no-link .cover::after,.more-card .cover::after{display:none;}
+  .release-card .cover .tag-pill{z-index:2;}
+  .card-body h3{font-size:16px;}
+  @media (hover:none){ .release-card .cover::after,.party-card .poster::after{display:none;} }
+
+  /* ---- DJ party detail: product-page layout ---- */
+  .detail-split{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,9fr);gap:64px;align-items:start;}
+  .detail-poster{width:auto;flex:none;position:sticky;top:90px;background:var(--wash);padding:40px;}
+  .detail-poster img{max-height:72vh;width:auto;max-width:100%;margin:0 auto;}
+  .detail-setlist-col{padding-top:8px;}
+  .detail-title{font-size:clamp(26px,3.4vw,40px);letter-spacing:.06em;}
+  .detail-meta{display:block;margin-top:26px;border-top:1px solid var(--ink);}
+  .detail-meta .meta-line{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink) !important;font-weight:500 !important;}
+  .detail-meta .meta-line svg{display:none;}
+  .detail-meta .meta-line::before{
+    flex:0 0 92px;font-family:var(--font-label);font-weight:600;font-size:11px;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase;
+  }
+  .detail-meta .meta-line:nth-child(1)::before{content:'Date';}
+  .detail-meta .meta-line:nth-child(2)::before{content:'Venue';}
+  .detail-meta .meta-line:nth-child(3)::before{content:'Genre';}
+  .detail-setlist-title{margin:40px 0 14px;font-size:12px;color:var(--ink);}
+  .detail-setlist-box{background:none;padding:0;border-radius:0;}
+  .detail-setlist-box > p{padding:18px 0;border-top:1px solid var(--ink);}
+  .dj-note{padding:16px 18px;background:var(--wash);border-left:2px solid var(--accent);border-radius:var(--radius);color:var(--ink);}
+  .dj-setlist-img{max-width:100%;margin:0 0 22px;}
+  .dj-tracklist{border-top:1px solid var(--ink);}
+  .dj-tracklist .album-track{padding:12px 4px;border-bottom:1px solid var(--line);border-bottom-style:solid;font-size:14px;transition:background-color .15s,padding .2s var(--ease);}
+  .dj-tracklist .album-track:hover{background:var(--wash);padding-left:10px;}
+  .dj-tracklist .album-track .num{font-family:var(--font-label);font-weight:600;letter-spacing:.06em;color:var(--accent-deep);min-width:30px;}
+  .dj-tracklist .album-track .t{font-weight:500;}
+  @media (max-width:860px){
+    .detail-split{grid-template-columns:1fr;gap:32px;}
+    .detail-poster{position:relative;top:0;padding:24px;}
+    .detail-poster img{max-height:60vh;}
+  }
+
+  /* ---- Album Works: product rows ---- */
+  .album-card-main{gap:32px;padding:32px 0 18px;}
+  .album-cover{width:168px;height:168px;padding:16px;background:var(--wash);}
+  .album-cover img{transition:transform .5s var(--ease);}
+  .album-card:hover .album-cover img{transform:scale(1.04);}
+  .album-title{font-family:var(--font-head);font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:.06em;}
+  .album-actions{padding-left:200px;}
+  .album-tracklist-hint{padding-left:200px;}
+  @media (max-width:640px){
+    .album-cover{width:96px;height:96px;padding:8px;}
+    .album-card-main{gap:18px;}
+    .album-actions,.album-tracklist-hint{padding-left:0;}
+  }
+
+  /* ---- Behind: editorial cards + centered article ---- */
+  .post-thumb{background:var(--wash);}
+  .post-detail{max-width:780px;margin:0 auto;}
+  .post-detail .detail-head{text-align:center;padding-bottom:28px;border-bottom:1px solid var(--ink);}
+  .post-detail .detail-title{font-size:clamp(24px,3.6vw,38px);}
+  .post-detail .detail-date{margin-top:12px;color:var(--accent-deep);}
+  .detail-body{margin-top:36px;}
+  .detail-body p{font-size:16px;line-height:1.85;}
+
+  /* ---- About: press-strip style affiliations ---- */
+  .affil-row{background:var(--wash);padding:28px 20px 32px;margin-left:-24px;margin-right:-24px;}
+  .affil-badges{gap:40px;}
+  .affil-badge{border:none;background:transparent;filter:grayscale(1);opacity:.75;transition:filter .25s,opacity .25s,transform .25s;}
+  .affil-badge:hover,.affil-badge:focus-visible{filter:none;opacity:1;}
+  .intro-tagline{text-transform:uppercase;}
+
+  /* ---- footer band ---- */
+  footer{padding:44px 24px;font-family:var(--font-label);letter-spacing:.06em;}
+
+  /* ---- motion: restrained reveals ---- */
+  @keyframes hxRise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+  @keyframes hxFade{from{opacity:0;}to{opacity:1;}}
+  .panel.hx-enter .identity{animation:hxRise .7s var(--ease) backwards;}
+  .panel.hx-enter .links-row{animation:hxRise .7s .12s var(--ease) backwards;}
+  .subpanel.hx-enter .page-head,.subpanel.hx-enter .page-desc{animation:hxRise .6s var(--ease) backwards;}
+  .subpanel.hx-enter.show-detail .detail-view{animation:hxFade .5s var(--ease) backwards;}
+  .subpanel.hx-enter.show-detail .detail-setlist-col{animation:hxRise .6s .1s var(--ease) backwards;}
+  .hx-enter .card-grid > *,.hx-enter .post-list > *,.hx-enter .album-list > *,.hx-enter .news-grid > *{animation:hxRise .6s var(--ease) backwards;}
+  .hx-enter .card-grid > :nth-child(2),.hx-enter .album-list > :nth-child(2),.hx-enter .news-grid > :nth-child(2),.hx-enter .post-list > :nth-child(2){animation-delay:.06s;}
+  .hx-enter .card-grid > :nth-child(3),.hx-enter .album-list > :nth-child(3),.hx-enter .news-grid > :nth-child(3),.hx-enter .post-list > :nth-child(3){animation-delay:.12s;}
+  .hx-enter .card-grid > :nth-child(4),.hx-enter .album-list > :nth-child(4),.hx-enter .news-grid > :nth-child(4){animation-delay:.18s;}
+  .hx-enter .card-grid > :nth-child(5),.hx-enter .album-list > :nth-child(5){animation-delay:.24s;}
+  .hx-enter .card-grid > :nth-child(6){animation-delay:.3s;}
+  .hx-enter .card-grid > :nth-child(7){animation-delay:.36s;}
+  .hx-enter .card-grid > :nth-child(n+8){animation-delay:.42s;}
+  @media (prefers-reduced-motion: reduce){
+    .hero::before,.hero::after,.hx-enter *{animation:none !important;}
+  }
+
+  /* ---- hexacube-1 refinements ---- */
+  @media (max-width:640px){
+    .page-desc{text-align:left;}
+    .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px;}
+    .release-card .cover{padding:10px;}
+    .party-card .poster{padding:10px 10px 0;}
+    .card-body{padding-top:10px;}
+    .card-body h3{font-size:13.5px;margin-bottom:6px;}
+    .work-sub{font-size:11px;margin-bottom:6px;}
+    .meta-line{font-size:11px;gap:4px;}
+    .meta-line svg{width:12px;height:12px;}
+    .affil-row{margin-left:-16px;margin-right:-16px;}
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1074,6 +1277,9 @@
             <span>Instagram</span>
           </a>
         </div>
+
+      </div>
+      <div class="news-wrap">
         <div class="news">
           <div class="section-head"><span class="news-icon" role="img" aria-label="공지사항"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span></div>
           <div class="news-grid">
@@ -6042,5 +6248,27 @@
 })();
 </script>
 
+<script>
+/* entrance hook: tags a panel/subpanel with .hx-enter for ~1.2s whenever it
+   becomes visible (or opens a detail), so CSS can stagger its contents in.
+   Purely visual — routing and state are untouched. */
+(function(){
+  function kick(el){
+    el.classList.remove('hx-enter'); void el.offsetWidth; el.classList.add('hx-enter');
+    clearTimeout(el._hxT); el._hxT=setTimeout(function(){ el.classList.remove('hx-enter'); },1300);
+  }
+  var obs=new MutationObserver(function(ms){
+    ms.forEach(function(m){
+      var el=m.target, was=' '+(m.oldValue||'')+' ';
+      if((el.classList.contains('is-active') && was.indexOf(' is-active ')<0) ||
+         (el.classList.contains('show-detail') && was.indexOf(' show-detail ')<0)) kick(el);
+    });
+  });
+  document.querySelectorAll('.panel,.subpanel').forEach(function(el){
+    obs.observe(el,{attributes:true,attributeFilter:['class'],attributeOldValue:true});
+  });
+  document.querySelectorAll('.panel.is-active,.subpanel.is-active').forEach(kick);
+})();
+</script>
 </body>
 </html>
