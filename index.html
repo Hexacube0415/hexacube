@@ -6222,18 +6222,23 @@
 </script>
 <script>
 /* home polaroid wall: on every load, pick 6 distinct random covers from the
-   Music Works cards already on the page */
+   Music Works cards released within the last 2 years (counted from today);
+   one pick per album, since tracks of the same album share artwork */
 (function(){
-  var seen={}, pool=[];
+  var now=new Date(), from=new Date(now.getFullYear()-2, now.getMonth(), now.getDate());
+  var seen={}, recent=[], older=[];
   document.querySelectorAll('.release-card').forEach(function(card){
     var img=card.querySelector('.cover img'); if(!img) return;
     var s=img.getAttribute('src'); if(!s || s.indexOf('covers/')!==0) return;
-    /* tracks from the same album share artwork: one pick per album */
     var p1=card.querySelector('.m-p1'), m=p1 && p1.textContent.match(/\[([^\]]+)\]/);
     var key=m ? 'album:'+m[1].trim().toLowerCase() : s;
-    if(!seen[key]){ seen[key]=1; pool.push(s); }
+    if(seen[key]) return; seen[key]=1;
+    var d=card.querySelector('.m-date'), dm=d && d.textContent.trim().match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
+    var dt=dm ? new Date(+dm[1], +dm[2]-1, +dm[3]) : null;
+    (dt && dt>=from && dt<=now ? recent : older).push(s);
   });
-  for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  var pool=shuffle(recent).concat(shuffle(older)); /* older only tops up if fewer than 6 recent */
   document.querySelectorAll('.pol img').forEach(function(img,k){ if(pool[k]) img.src=pool[k]; });
 })();
 </script>
