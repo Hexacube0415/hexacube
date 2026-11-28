@@ -1065,6 +1065,26 @@
   }
 
   .news-card.no-link{cursor:default;}
+
+  /* ---- subtab header: section pill centred, JOKER teaser on the same row,
+     right-aligned to the edge of the tab bar (no vertical jump) ---- */
+  .subtab-head{display:grid;grid-template-columns:minmax(0,max-content);justify-content:center;}
+  .subtab-head-top{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:0 12px;margin-bottom:14px;min-height:26px;}
+  .subtab-head-top .breadcrumb{grid-column:2;margin:0;}
+  .subtab-head-top .joker-teaser{grid-column:3;justify-self:end;margin:0;text-align:right;white-space:nowrap;font-size:13px;line-height:1.3;}
+  .subtab-head > .breadcrumb{justify-self:center;}
+  @media (max-width:640px){
+    .subtab-head{grid-template-columns:minmax(0,1fr);}
+    .subtab-head-top{display:flex;flex-direction:row;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px 10px;}
+    .subtab-head-top .joker-teaser{font-size:12px;margin-left:auto;}
+    .subtab-head > .breadcrumb{justify-self:start;margin:0 0 14px;}
+  }
+
+  @media (max-width:360px){
+    .subtab-head-top{gap:6px;}
+    .subtab-head-top .joker-teaser{font-size:10.5px;}
+    .subtab-head-top .breadcrumb{padding:5px 9px;letter-spacing:.06em;}
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
