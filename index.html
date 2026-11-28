@@ -1098,6 +1098,24 @@
   }
 
   @media (max-width:360px){ .subnav button{font-size:12.5px;padding:10px 4px;} }
+
+  /* ---- sky-blue filter group (Bootleg / Flip / Mash-up, Self-Released):
+     sky chip, sky circle with a white tick, and matching sky cover labels ---- */
+  :root{--sky:#4cb6ee;--sky-wash:#dff1fd;--sky-ink:#0d4a6e;}
+  .flt.blue:hover{box-shadow:var(--sh-lift);}
+  .flt.blue input:checked + .flt-box{background:var(--sky);border-color:var(--sky);}
+  .flt.blue .flt-box svg{stroke:#fff;}
+  .flt.blue:has(input:checked){background:var(--sky-wash);border-color:transparent;box-shadow:var(--sh-card);color:var(--sky-ink);}
+  .flt.blue input:focus-visible + .flt-box{outline-color:var(--sky);}
+  .release-card[data-f="other"] .tag-pill{background:var(--sky-wash);color:var(--sky-ink);}
+  .release-card[data-f="self"] .cover::before{
+    content:'Self-Released';position:absolute;top:10px;left:10px;z-index:1;
+    background:var(--sky-wash);color:var(--sky-ink);border-radius:9999px;padding:4px 10px;
+    font-family:var(--font-en);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.35;
+  }
+  @media (max-width:560px){
+    .tag-pill,.release-card[data-f="self"] .cover::before{top:7px;left:7px;font-size:9px;letter-spacing:.1em;padding:3px 8px;}
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
